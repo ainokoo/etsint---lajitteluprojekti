@@ -8,6 +8,24 @@ using namespace std;
     cout << x << endl;
 } */
 
+       
+int entry_count(List<int>& list) {
+    
+    int group_of_data_size;
+        cout << "How many data entries do you want? " << endl;
+        cin >> group_of_data_size;
+
+        for (int i = 0; i < group_of_data_size; i++) {
+            list.insert(i, 2 * i + 1);
+        }
+
+        int wanted_number;
+        cout << "Which number you want to search from the data entries? " << endl;
+        cin >> wanted_number;
+
+        return wanted_number;
+    }
+
 int main() {
 
 List<int> list;
@@ -28,17 +46,7 @@ cin >> choice;
 switch (choice) {
     case 1: {
 
-        int group_of_data_size;
-        cout << "How many data entries do you want? " << endl;
-        cin >> group_of_data_size;
-
-        for (int i = 0; i < group_of_data_size; i++) {
-            list.insert(i, 2 * i + 1);
-        }
-
-        int wanted_number;
-        cout << "Which number you want to search from the data entries? " << endl;
-        cin >> wanted_number;
+        int wanted_number = entry_count(list);
 
         bool found = false;
 
@@ -57,13 +65,48 @@ switch (choice) {
           cout << "Wanted number does not exist" << endl;
     }
 
+    } break;
 
+    case 2: {
+
+    int wanted_number = entry_count(list);
+
+    bool found = false;
+
+    int bottom = 0;
+    int top = list.size() - 1;
+    
+    while (bottom <= top) {
+    int mid = (bottom + top) / 2;
+
+    int x;
+    list.retrieve(mid, x);
+    
+    if (x == wanted_number) {
+        cout << " Number found, it was entry number " << mid << endl;
+        found = true;
+        break;
+    }
+
+    if (x > wanted_number) {
+        top = mid - 1;
+    } else {
+        bottom = mid + 1;
+    }
+}
+
+    if (!found) {
+        cout << "Wanted number does not exist" << endl;
+    }
+    
     } break;
 
     case 6: {
         cout << "Quitting program. " << endl;
     };
 }
+
+// listan pitäis olla 1 3 7 9 11 13 15 17 19 21
 
 /*List<int> test_list;
 
