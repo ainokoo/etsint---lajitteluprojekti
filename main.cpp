@@ -1,6 +1,8 @@
 #include "list.h"
 #include "utility.h"
 #include <iostream>
+#include <cstdlib>
+#include <vector>
 
 using namespace std;
 
@@ -93,45 +95,77 @@ switch (choice) {
     } else {
         bottom = mid + 1;
     }
-}
+    }
 
     if (!found) {
         cout << "Wanted number does not exist" << endl;
     }
+
+    } break;
+
+    case 3: {
     
+    int data_size;
+    cout << "How many data entries do you want? " << endl;
+    cin >> data_size;
+
+    vector<int> data(data_size);
+
+    for (int i = 0; i < data_size; i++) {
+        data[i] = rand() % (10 * data_size);
+    }
+
+    int data_entry_amount;
+    cout << "How many data entries do you want to see from the beginning before sorting? " << endl;
+    cin >> data_entry_amount;
+
+    cout << "Data entries from the beginning (before sorting) are: " << endl;
+    for (int i = 0; i < data_entry_amount; i++) {
+    cout  << data[i] << endl;
+        }
+
+    cout << "Starting the sorting..." << endl;
+    int first_unsorted = data[0];
+    int position;
+    int current;
+
+    for (first_unsorted = 1; first_unsorted < data_size; first_unsorted++) {
+        if (data[first_unsorted] < data[first_unsorted -1]) {
+            position = first_unsorted;
+            current = data[first_unsorted];
+            do {
+                data[position] = data[position - 1];
+                position--;
+            } while (position > 0 && data[position - 1 ] > current);
+            data[position] = current;
+        }
+    }
+
+    cout << "How many data entries do you want to see from the beginning after sorting? " << endl;
+    cin >> data_entry_amount;
+
+    cout << "Data entries from the beginning (after sorting) are: " << endl;
+    for (int i = 0; i < data_entry_amount; i++) {
+    cout << data[i] << endl;
+        }
+    } break;
+
+    case 4: {
+
+    } break;
+
+    case 5: {
+
     } break;
 
     case 6: {
         cout << "Quitting program. " << endl;
+        return 0;
     };
 }
 
-// listan pitäis olla 1 3 7 9 11 13 15 17 19 21
+// listan pitäis olla 1 3 7 9 11 13 15 17 19 21....
 
-/*List<int> test_list;
-
-test_list.insert(0, 3);
-test_list.insert(1, 5);
-test_list.insert(2, 7);
-
-test_list.traverse(print);
-
-int x;
-test_list.retrieve(2, x);
-
-cout << "Haettu paikka 2: " << x << endl;
-
-cout << "Listan koko: " << test_list.size() << endl;
-
-List<int> copy_list = test_list;
-
-cout << "Alkuperäisen istan tyhjäys..." <<endl;
-
-test_list.clear();
-
-cout << "Kokeillaan kopioidun listan tulostus: " << endl;
-copy_list.traverse(print);
-*/
 
     return 0;
 }
