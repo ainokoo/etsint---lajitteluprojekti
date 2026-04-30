@@ -1,17 +1,11 @@
-#include "linked_list.h"
+#include "list.h"
 #include "utility.h"
-//#include "cont_list.h"
 #include <iostream>
 #include <cstdlib>
 #include <vector>
 #include <algorithm>
 
 using namespace std;
-
-/* void print(int &x) {
-    cout << x << endl;
-} */
-
        
 int entry_count(List<int>& list) {
     
@@ -38,7 +32,7 @@ int partition(vector<int>& data, int low, int high) {
     for (int i = low + 1; i <= high; i++) {
         if (data[i] < pivot) {
             last_small = last_small + 1;
-            swap(last_small, i);
+            swap(data[last_small], data[i]);
         }
     }
     swap(data[low], data[last_small]);
@@ -223,9 +217,6 @@ switch (choice) {
         return 0;
     };
 }
-
-// listan pitäis olla 1 3 7 9 11 13 15 17 19 21....
-
 
     return 0;
 }
