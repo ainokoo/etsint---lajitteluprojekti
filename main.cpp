@@ -55,6 +55,7 @@ int main() {
 List<int> list;
 int choice;
 
+do {
 cout << " 1. Linear searching " << endl;
 cout << " 2. Binary searching " << endl;
 cout << " 3. n^2 type sorting " << endl;
@@ -210,14 +211,19 @@ switch (choice) {
 
     case 5: {
 
+    cout << "Choice 5 not implemented" << endl;
+
     } break;
 
     case 6: {
         cout << "Quitting program. " << endl;
-        return 0;
-    };
-}
+    } break;
 
-    return 0;
-}
+    default: {
+        cout << "Invalid choice" << endl;
+    } break;
 
+} 
+
+} while (choice != 6); 
+}
