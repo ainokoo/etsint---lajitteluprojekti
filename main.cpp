@@ -1,8 +1,10 @@
-#include "list.h"
+#include "linked_list.h"
 #include "utility.h"
+//#include "cont_list.h"
 #include <iostream>
 #include <cstdlib>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -27,6 +29,32 @@ int entry_count(List<int>& list) {
 
         return wanted_number;
     }
+
+int partition(vector<int>& data, int low, int high) {
+    swap(data[low], data[(low + high) / 2]);
+    int pivot = data[low];
+
+    int last_small = low;
+    for (int i = low + 1; i <= high; i++) {
+        if (data[i] < pivot) {
+            last_small = last_small + 1;
+            swap(last_small, i);
+        }
+    }
+    swap(data[low], data[last_small]);
+    return last_small;
+}
+
+void quicksort(vector<int>& data, int low, int high) {
+    if (low < high) {
+        int pivot_position = partition(data, low, high);
+
+        quicksort(data, low, pivot_position - 1);
+        quicksort(data, pivot_position + 1, high);
+    }
+
+}
+
 
 int main() {
 
@@ -122,7 +150,7 @@ switch (choice) {
     cout << "Data entries from the beginning (before sorting) are: " << endl;
     for (int i = 0; i < data_entry_amount; i++) {
     cout  << data[i] << endl;
-        }
+    }
 
     cout << "Starting the sorting..." << endl;
     int first_unsorted = data[0];
@@ -150,7 +178,39 @@ switch (choice) {
         }
     } break;
 
+
     case 4: {
+
+    int data_size;
+    cout << "How many data entries do you want? " << endl;
+    cin >> data_size;
+
+    vector<int> data(data_size);
+
+    for (int i = 0; i < data_size; i++) {
+        data[i] = rand() % (10 * data_size);
+    }
+
+    int data_entry_amount;
+    cout << "How many data entries do you want to see from the beginning before sorting? " << endl;
+    cin >> data_entry_amount;
+
+    cout << "Data entries from the beginning (before sorting) are: " << endl;
+    for (int i = 0; i < data_entry_amount; i++) {
+    cout  << data[i] << endl;
+    }
+
+    cout << "Starting the sorting..." << endl;
+    quicksort(data, 0, data_size - 1);
+
+    cout << "How many data entries do you want to see from the beginning after sorting? " << endl;
+    cin >> data_entry_amount;
+
+    cout << "Data entries from the beginning (after sorting) are: " << endl;
+    for (int i = 0; i < data_entry_amount; i++) {
+    cout << data[i] << endl;
+        }
+
 
     } break;
 
